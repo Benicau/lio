@@ -11,7 +11,7 @@ body {
      width: 150px;
      height: 150px;
     
-     background-color: rgba(1, 1, 1, 0.7);
+     background-color: rgba(255, 255, 255, 0.8);
     border-radius: 75px;
     position: absolute;
     right: 3%; 
@@ -29,9 +29,9 @@ body {
   }
   }
   .info{
-    background-color: rgba(1, 1, 1, 0.7);
-    width: 350px;
-    color: white;
+    background-color: rgba(255, 255, 255, 0.8);
+    width: 450px;
+    color: black;
 
 
     border-radius: 15px;
@@ -39,18 +39,29 @@ body {
     padding-left: 15px;
     right: 3%;
     bottom: 5%;
+    p{
+      i{
+        color: chocolate;
+        font-size: 22px;
+       
+        width: 32px;
+        
+      }
+     
+    }
+   
 
   }
  
   
  h1{
     position: absolute;
-    color: white;
     top: 3%;
     left: 50%;
     transform: translate(-50%);
     color:chocolate;
-    opacity: 0.8;
+    font-size: 35px;
+ 
  }
   
   ul {
@@ -67,31 +78,31 @@ body {
       display: flex;
       align-items: center;
       justify-content: space-between;
-      background-color: rgba(1, 1, 1, 0.7);
+      background-color: rgba(255, 255, 255, 0.8);
       margin: 8px 0;
      
       border-radius: 10px;
-      height: 130px;
-      width: 300px;
+      height: 100px;
+      width: 350px;
       margin: auto;
       margin-bottom: 25px;
       position: relative;
       &:hover {
-        background-color: #555;
+        background-color: rgba(255, 255, 255, 1);
         color:chocolate;
       }
      
   
       a {
         text-decoration: none;
-        color:white;
+        color: black;
         font-weight: bold;
-        font-size: 32px;
+        font-size: 28px;
         width: 100%;
         height: 100%;
         position: absolute;
         text-align: center;
-        line-height: 130px;
+        line-height: 100px;
        
 
         display: block;
@@ -100,14 +111,21 @@ body {
   
         i {
           padding-right: 10px;
+          color: chocolate;
         }
-        &:hover {
-         
-            color:chocolate;
-          }
+        .white{
+          color: black;
+        }
+       
   
         
       }
     }
   }
-  
+  .pattern {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    background-image: url(/public/uploads/pattern.png);
+    opacity: 1;
+}

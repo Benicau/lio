@@ -3,7 +3,7 @@
 {% block title %}Index{% endblock %}
 
 {% block body %}
- 
+<div class="pattern"></div>
 
 <ul>
   <li>
@@ -16,6 +16,18 @@
     <a href="{{ path('app_api_facture') }}">
       <i class="fas fa-file-invoice-dollar"></i>
       Facture
+    </a>
+  </li>
+  <li>
+    <a href="{{ path('app_api_facture') }}">
+      <i class="fa-solid fa-shuffle"></i>
+      Devis <i class="fa-solid fa-arrow-right white"></i> Facture
+    </a>
+  </li>
+  <li>
+    <a href="{{ path('app_api_facture') }}">
+      <i class="fa-solid fa-user"></i>
+      Admin
     </a>
   </li>
 </ul>
@@ -31,12 +43,12 @@
 </div>
 
 <div class = "info">
-<p>{{ item.adress }}</p>
-<p>{{item.codePostal}}</p>
-<p>{{item.phone}}</p>
-<p>{{item.tvaNumber}}</p>
-<p>{{item.pays}}</p>
-<p>{{item.city}}</p>
+
+<p><i class="fa-solid fa-map-pin"></i>{{ item.adress }}
+  {{item.codePostal}} {{item.city}} ({{item.pays}})</p>
+<p><i class="fa-solid fa-phone"></i>{{item.phone}}</p>
+<p><i class="fa-solid fa-tag"></i>{{item.tvaNumber}}</p>
+
 </div>
 {% endfor %}
 
