@@ -1,0 +1,113 @@
+// styles.scss
+
+body {
+    font-family: Arial, sans-serif;
+  background-image: url('../../public/uploads/lio.png');
+  background-size: cover;
+  background-repeat: no-repeat;
+
+  }
+  .image{
+     width: 150px;
+     height: 150px;
+    
+     background-color: rgba(1, 1, 1, 0.7);
+    border-radius: 75px;
+    position: absolute;
+    right: 3%; 
+    top: 3%;
+    img, p{
+   width: 70%;
+  
+   position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+   
+   
+  
+  }
+  }
+  .info{
+    background-color: rgba(1, 1, 1, 0.7);
+    width: 350px;
+    color: white;
+
+
+    border-radius: 15px;
+    position: absolute;
+    padding-left: 15px;
+    right: 3%;
+    bottom: 5%;
+
+  }
+ 
+  
+ h1{
+    position: absolute;
+    color: white;
+    top: 3%;
+    left: 50%;
+    transform: translate(-50%);
+    color:chocolate;
+    opacity: 0.8;
+ }
+  
+  ul {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    
+  
+    li {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      background-color: rgba(1, 1, 1, 0.7);
+      margin: 8px 0;
+     
+      border-radius: 10px;
+      height: 130px;
+      width: 300px;
+      margin: auto;
+      margin-bottom: 25px;
+      position: relative;
+      &:hover {
+        background-color: #555;
+        color:chocolate;
+      }
+     
+  
+      a {
+        text-decoration: none;
+        color:white;
+        font-weight: bold;
+        font-size: 32px;
+        width: 100%;
+        height: 100%;
+        position: absolute;
+        text-align: center;
+        line-height: 130px;
+       
+
+        display: block;
+        
+        
+  
+        i {
+          padding-right: 10px;
+        }
+        &:hover {
+         
+            color:chocolate;
+          }
+  
+        
+      }
+    }
+  }
+  

@@ -1,0 +1,45 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Index{% endblock %}
+
+{% block body %}
+ 
+
+<ul>
+  <li>
+    <a href="{{ path('app_api_devis') }}">
+      <i class="fas fa-file-invoice"></i>
+      Devis
+    </a>
+  </li>
+  <li>
+    <a href="{{ path('app_api_facture') }}">
+      <i class="fas fa-file-invoice-dollar"></i>
+      Facture
+    </a>
+  </li>
+</ul>
+
+{% for item in companyInfo %}
+<h1>{{item.name}}</h1>
+<div class="image">
+  {% if item.logo %}
+    <img src="{{ asset('uploads/logos/' ~ item.logo) }}" alt="{{ item.name }}">
+  {% else %}
+    <p>Pas de photo</p>
+  {% endif %}
+</div>
+
+<div class = "info">
+<p>{{ item.adress }}</p>
+<p>{{item.codePostal}}</p>
+<p>{{item.phone}}</p>
+<p>{{item.tvaNumber}}</p>
+<p>{{item.pays}}</p>
+<p>{{item.city}}</p>
+</div>
+{% endfor %}
+
+ 
+{% endblock %}
+

@@ -1,5 +1,20 @@
-controllers:
-    resource:
-        path: ../src/Controller/
-        namespace: App\Controller
-    type: attribute
+# config/routes.yaml
+dashboard:
+    path: /admin
+    controller: App\Controller\Admin\DashboardController::index
+
+app_api:
+    path: /indexhome
+    controller: App\Controller\ApiController::index
+
+app_api_devis:
+    path: /indexhome/devis
+    controller: App\Controller\ApiController::devis
+    methods: [GET]
+
+app_api_facture:
+    path: /indexhome/facture
+    controller: App\Controller\ApiController::facture
+    methods: [GET]
+
+# ...
