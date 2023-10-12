@@ -1,0 +1,91 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Index{% endblock %}
+
+{% block body %}
+<div class="content">
+    <h1>Création de devis</h1>
+
+    <!-- Produits -->
+    <div class="product">
+        <h2>Choix produits</h2>
+        <div>
+            {% for category in categories %}
+            <div class="tab" id="tab-{{ category.id }}">
+                {{ category.name }}
+            </div>
+            {% endfor %}
+        </div>
+        <div>
+            {% for category in categories %}
+            <div id="content-{{ category.id }}" class="tab-content">
+                {% for product in category.products %}
+                <div class="product-item">
+                    <p>{{ product.description }} ({{ product.price }}€)
+                    <input type="number" class="quantity" placeholder="0" data-price="{{ product.price }}">         
+                    </p>
+                </div>
+                {% endfor %}
+            </div>
+            {% endfor %}
+        </div>
+    </div>
+
+    <!-- Clients -->
+    <div class="clients">
+        <h2>Choix du client</h2>
+        <select id="client-select">
+            {% for client in clients %}
+            <option value="{{ client.id }}" {{ loop.first ? 'selected' : '' }}>
+                {{ client.compagny ? client.compagny : (client.name ~ ' ' ~ client.surname) }}
+            </option>
+            {% endfor %}
+        </select>
+    </div>
+
+    <!-- Choix TVA -->
+    <div class="choixTva">
+        <h2>Choix TVA</h2>
+        <label><input type="radio" name="tva" value="0"> 0%</label>
+        <label><input type="radio" name="tva" value="6" checked> 6%</label>
+        <label><input type="radio" name="tva" value="21"> 21%</label>
+    </div>
+
+    <!-- Acompte -->
+    <div class="acompte">
+        <h2>Acompte</h2>
+        <input type="range" id="acompte" name="acompte" min="0" max="100" value="40">
+        <span id="acompteValue">40%</span>
+    </div>
+</div>
+
+<script>
+document.addEventListener("DOMContentLoaded", function () {
+    // Gestion des onglets
+    let tabs = document.querySelectorAll(".tab");
+    let contents = document.querySelectorAll(".tab-content");
+    if (tabs.length > 0 && contents.length > 0) {
+        tabs[0].classList.add("active");
+        contents[0].style.display = "block";
+    }
+    tabs.forEach((tab, index) => {
+        tab.addEventListener("click", function () {
+            tabs.forEach(t => t.classList.remove("active"));
+            tab.classList.add("active");
+            contents.forEach(c => c.style.display = "none");
+            contents[index].style.display = "block";
+        });
+    });
+
+    // Gestion de l'acompte
+    const acompteInput = document.getElementById('acompte');
+    const acompteValueSpan = document.getElementById('acompteValue');
+    acompteInput.addEventListener("input", function () {
+        acompteValueSpan.textContent = `${this.value}%`;
+    });
+});
+
+
+
+</script>
+{% endblock %}

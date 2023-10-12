@@ -6,6 +6,7 @@ use App\Entity\Devis;
 use App\Entity\Facture;
 use App\Entity\Product;
 use App\Entity\Category;
+use App\Entity\Clients;
 use App\Entity\CompanyInfo;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
@@ -32,7 +33,6 @@ class DashboardController extends AbstractDashboardController
        
     }
     
-
     public function configureDashboard(): Dashboard
     {
         return Dashboard::new()
@@ -47,9 +47,15 @@ class DashboardController extends AbstractDashboardController
             MenuItem::linkToCrud('Ajouter un produit','fas fa-plus', Product::class )->setAction(Crud::PAGE_NEW),
             MenuItem::linkToCrud('Voir les produits', 'fas fa-eye', Product::class)
         ]);
+        
         yield MenuItem::subMenu('Catégories', 'fa fa-bars')->setSubItems([
             MenuItem::linkToCrud('Ajouter une catégorie','fas fa-plus', Category::class )->setAction(Crud::PAGE_NEW),
             MenuItem::linkToCrud('Voir les catégories', 'fas fa-eye', Category::class)
+        ]);
+        yield MenuItem::section('Clients');
+        yield MenuItem::subMenu('Clients', 'fa fa-bars')->setSubItems([
+            MenuItem::linkToCrud('Ajouter un client','fas fa-plus', Clients::class )->setAction(Crud::PAGE_NEW),
+            MenuItem::linkToCrud('Voir les clients', 'fas fa-eye', Clients::class)
         ]);
         yield MenuItem::section('Devis');
         yield MenuItem::subMenu('Actions', 'fa fa-bars')->setSubItems([

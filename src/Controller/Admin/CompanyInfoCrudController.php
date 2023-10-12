@@ -60,6 +60,7 @@ class CompanyInfoCrudController extends AbstractCrudController
             TextField::new('codePostal', 'Code Postal'),
             TextField::new('phone', 'Numéro de téléphone'),
             TextField::new('tvaNumber', 'Numéro de TVA'),
+            TextField::new('banque', 'Numéro de compte'),
         ];
     }
     

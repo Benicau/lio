@@ -1,7 +1,7 @@
 // styles.scss
 
 body {
-    font-family: Arial, sans-serif;
+    font-family:'Courier New', Courier, monospace;
   background-image: url('../../public/uploads/lio.png');
   background-size: cover;
   background-repeat: no-repeat;
@@ -127,5 +127,128 @@ body {
     width: 100%;
     height: 100%;
     background-image: url(/public/uploads/pattern.png);
-    opacity: 1;
+    opacity: 0.2;
 }
+
+.content{
+ background-color: rgba(255, 255, 255, 0.85);
+ width: 90%;
+ margin: auto;
+ min-height: 90vh;
+ margin-top: 20px;
+ position: relative;
+ h1{
+  position: relative;
+  text-align: center;
+  padding-top: 5px;
+ }
+ .product{
+  width: 800px;
+  background-color:cadetblue;
+  margin-left: 2%;
+  border-radius: 5px;
+  padding-left: 15px;
+  padding-right: 15px;
+  h2{
+    color:black;
+    padding-left: 3px;
+    text-decoration: underline;
+    padding-top: 5px;
+  }
+  input{
+    width: 55px;
+  }
+ 
+}
+ .clients{
+  background-color:cadetblue;
+    width: 340px;
+    height: 90px;
+    position: absolute;
+    top: 69px;
+    right: 50px;
+    border-radius: 5px;
+    h2{
+      color:black;
+      padding-left: 3px;
+      text-decoration: underline;
+     margin: 0;
+     padding-top: 5px;
+     text-align: center;
+    }
+    select{
+      font-size: 17px;
+      width: 90%;
+      margin-left: 5%;
+      margin-top: 15px;
+     
+    }
+  }
+  .choixTva{
+    background-color:cadetblue;
+    width: 180px;
+    height: 90px;
+    position: absolute;
+    top: 69px;
+    right: 400px;
+    border-radius: 5px;
+    text-align: center;
+
+    h2{
+      color:black;
+      padding-left: 3px;
+      text-decoration: underline;
+     margin: 0;
+     padding-top: 5px;
+     text-align: center;
+     margin-bottom: 10px;
+    
+    }
+  }
+
+  .acompte{ 
+    width: 160px;
+    text-align: center;
+    background-color:cadetblue;
+    border-radius: 5px;
+    height: 90px;
+    position: absolute;
+    top:69px;
+    right: 590px;
+    h2{
+      color:black;
+      padding-left: 3px;
+      text-decoration: underline;
+     margin: 0;
+     padding-top: 5px;
+     text-align: center;
+     margin-bottom: 10px;
+    }
+  }
+
+ /* Style des onglets */
+.tab {
+  display: inline-block;
+  
+  padding: 5px;
+  border: 1px solid #ccc;
+  cursor: pointer;
+  font-size: 18px;
+  
+}
+
+/* Style du contenu des onglets */
+.tab-content {
+  display: none;
+ 
+  padding: 10px;
+  font-size: 18px;
+  font-weight: 600;
+}
+
+/* Style de l'onglet actif */
+.tab.active {
+  background-color: #ccc;
+}
+}
+

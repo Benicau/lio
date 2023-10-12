@@ -38,6 +38,9 @@ class CompanyInfo
     #[ORM\Column(length: 255)]
     private ?string $city = null;
 
+    #[ORM\Column(length: 255)]
+    private ?string $banque = null;
+
     public function getId(): ?int
     {
         return $this->id;
@@ -135,6 +138,17 @@ class CompanyInfo
     public function setPhone(string $phone): static
     {
         $this->phone = $phone;
+
+        return $this;
+    }
+    public function getBanque(): ?string
+    {
+        return $this->banque;
+    }
+
+    public function setBanque(string $banque): static
+    {
+        $this->banque = $banque;
 
         return $this;
     }
