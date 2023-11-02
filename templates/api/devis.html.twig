@@ -21,9 +21,10 @@
             <div id="content-{{ category.id }}" class="tab-content">
                 {% for product in category.products %}
                 <div class="product-item">
-                    <p>{{ product.description }} ({{ product.price }}€)
-                    <input type="number" class="quantity" placeholder="0" data-price="{{ product.price }}">         
-                    </p>
+                    <p>{{ product.description }} <span>({{ product.price }}€)</span></p>
+                    <input type="number" class="quantity" placeholder="0" data-price="{{ product.price }}"
+                        data-id="{{ product.id }}" data-achat="{{ product.achat }}"
+                        data-description="{{ product.description }}" data-cat="{{ category.name }}">
                 </div>
                 {% endfor %}
             </div>
@@ -51,41 +52,243 @@
         <label><input type="radio" name="tva" value="21"> 21%</label>
     </div>
 
+    <!-- Date d'échéance -->
+    <div class="dateEcheance">
+        <h2>Date d'échéance</h2>
+        <input type="date" id="dateEcheance" name="dateEcheance"
+            value="{{ 'now'|date_modify('+2 weeks')|date('Y-m-d') }}" min="{{ 'now'|date('Y-m-d') }}">
+    </div>
+
     <!-- Acompte -->
     <div class="acompte">
         <h2>Acompte</h2>
         <input type="range" id="acompte" name="acompte" min="0" max="100" value="40">
         <span id="acompteValue">40%</span>
     </div>
+    <div class="visuel">
+        <table>
+            <thead>
+                <tr>
+                    <th>Quantité</th>
+                    <th>Description</th>
+                    <th>Catégories</th>
+                    <th>Prix unitaire</th>
+                    <th>Total (HTVA)</th>
+                    <th>TVA</th>
+                </tr>
+            </thead>
+            <tbody class="produitTab">
+
+            </tbody>
+        </table>
+    </div>
+    <div class="result">
+        <div class='ele'>
+            <h5>Bénéfices</h5>
+            <div class="benef"></div>
+        </div>
+        <div class='ele'>
+            <h5>Accompte</h5>
+            <div class="accompteaf"></div>
+        </div>
+        <div class='ele'>
+            <h5>Tva</h5>
+            <div class="tva"></div>
+        </div>
+        <div class='ele'>
+            <h5>Total hors Tva</h5>
+            <div class="total"></div>
+        </div>
+        <div class='ele'>
+            <h5>Total Tva/c</h5>
+            <div class="totaltvac"></div>
+        </div>
+    </div>
+
+    <div class="formulaire">
+    {{ form_start(form) }}
+        {{ form_widget(form) }}
+        <button type="submit">Valider</button>
+    {{ form_end(form) }}
+     
+    </div>
+     <a href="{{path('app_api')}}" class='retour'>Retour</a>
 </div>
 
 <script>
-document.addEventListener("DOMContentLoaded", function () {
-    // Gestion des onglets
-    let tabs = document.querySelectorAll(".tab");
-    let contents = document.querySelectorAll(".tab-content");
-    if (tabs.length > 0 && contents.length > 0) {
-        tabs[0].classList.add("active");
-        contents[0].style.display = "block";
-    }
-    tabs.forEach((tab, index) => {
-        tab.addEventListener("click", function () {
-            tabs.forEach(t => t.classList.remove("active"));
-            tab.classList.add("active");
-            contents.forEach(c => c.style.display = "none");
-            contents[index].style.display = "block";
+    document.addEventListener("DOMContentLoaded", function () {
+        // Gestion des onglets
+        let tabs = document.querySelectorAll(".tab");
+        let contents = document.querySelectorAll(".tab-content");
+        if (tabs.length > 0 && contents.length > 0) {
+            tabs[0].classList.add("active");
+            contents[0].style.display = "block";
+        }
+        tabs.forEach((tab, index) => {
+            tab.addEventListener("click", function () {
+                tabs.forEach(t => t.classList.remove("active"));
+                tab.classList.add("active");
+                contents.forEach(c => c.style.display = "none");
+                contents[index].style.display = "block";
+            });
+        });
+
+        // Gestion de l'acompte
+        const acompteInput = document.getElementById('acompte');
+        const acompteValueSpan = document.getElementById('acompteValue');
+        acompteInput.addEventListener("input", function () {
+            acompteValueSpan.textContent = `${this.value}%`;
         });
     });
 
-    // Gestion de l'acompte
-    const acompteInput = document.getElementById('acompte');
-    const acompteValueSpan = document.getElementById('acompteValue');
-    acompteInput.addEventListener("input", function () {
-        acompteValueSpan.textContent = `${this.value}%`;
+    calcul();
+
+
+    const inputs = document.querySelectorAll('.product input');
+    inputs.forEach((input) => {
+        input.addEventListener('input', function () {
+
+            if (input.value < 0) {
+                input.value = 0
+            }
+            calcul();
+
+
+        });
     });
-});
+
+    const acompteEle = document.getElementById('acompte');
+
+    acompteEle.addEventListener('input', function () {
+        calcul();
+    });
+
+    const dateEcheanceEle = document.getElementById('dateEcheance');
+    dateEcheanceEle.addEventListener('input', calcul);
+
+    
+    const tvaButtons = document.querySelectorAll('input[name="tva"]');
+
+    tvaButtons.forEach((input) => {
+        input.addEventListener('change', function () {
+            calcul();
+        });
+    });
 
 
+    function calcul() {
+        const datas = document.querySelectorAll('.product input');
+        var total = 0;
+        var achat = 0;
+        var produitaffich = ''
+        datas.forEach((input) => {
+            var value = input.value;
+            var data = input.getAttribute('data-price');
+            var data2 = input.getAttribute('data-achat');
+            const description = input.getAttribute('data-description');
+            const cat = input.getAttribute('data-cat');
 
+            const tvaButtons = document.getElementsByName('tva');
+            let selectedTva;
+
+            for (let i = 0; i < tvaButtons.length; i++) {
+                if (tvaButtons[i].checked) {
+                    selectedTva = tvaButtons[i].value;
+                    break;
+                }
+            }
+
+
+            if (value === '') {
+                value = 0
+            } else if (parseFloat(value) < 0) {
+                value = 0
+
+            }
+            total = total + (data * value)
+            achat = achat + (data2 * value)
+            data = parseFloat(data);
+            if (value > 0) {
+                produitaffich = produitaffich + "<tr><th>" + value + "</th><th>" + description + "</th><th>" +
+                    cat + "</th><th>" + data + " €</th><th>" + (value * data).toFixed(2) + " €</th><th>" + (selectedTva /
+                        100 * (value * data)).toFixed(2) + " €</th></tr>";
+            }
+
+            if (total < 0) {
+                total = 0;
+            }
+
+        });
+
+        achat = total - achat;
+        const affichtot = document.querySelector('.total')
+        const benef = document.querySelector('.benef')
+        affichtot.innerHTML = String(total.toFixed(2)) + " €";
+        benef.innerHTML = String(achat.toFixed(2)) + " €";
+
+        const tvaButtons = document.getElementsByName('tva');
+        let selectedTva;
+
+        for (let i = 0; i < tvaButtons.length; i++) {
+            if (tvaButtons[i].checked) {
+                selectedTva = tvaButtons[i].value;
+                break;
+            }
+        }
+
+        const affitva = document.querySelector('.tva');
+        selectedTva = selectedTva / 100;
+
+        var tva = 0;
+        tva = total * selectedTva;
+        affitva.innerHTML = String(tva.toFixed(2)) + " €";
+
+        tvac = tva + total;
+
+        const affitvac = document.querySelector('.totaltvac');
+        affitvac.innerHTML = String(tvac.toFixed(2)) + " €"
+
+        const acompteElement = document.getElementById('acompte');
+        const affitac = document.querySelector('.accompteaf');
+
+        var acompteValue = acompteElement.value;
+        acompteValue = acompteValue / 100 * tvac;
+        affitac.innerHTML = String(acompteValue.toFixed(2)) + " €"
+
+        const produitTab = document.querySelector('.produitTab');
+        produitTab.innerHTML = produitaffich;
+
+
+        const textMe = document.querySelector('#devis_texte');
+        textMe.value = produitaffich;
+
+        const montantMe = document.querySelector('#devis_montantHorsTva');
+        montantMe.value = total.toFixed(2);
+
+        const tvaMe = document.querySelector('#devis_TauxTva');
+        tvaMe.value = selectedTva * 100;
+
+        const beneMe = document.querySelector('#devis_benefice');
+        beneMe.value = achat.toFixed(2);
+
+        const acoMe = document.querySelector('#devis_accompte');
+        acoMe.value = acompteValue.toFixed(2);
+
+        const dateEcheanceEle = document.getElementById('dateEcheance');
+        const dateFinHidden = document.querySelector('#devis_endDate');
+       dateFinHidden.value = dateEcheanceEle.value;
+
+       const clientSelect = document.getElementById('client-select');
+    const clientHiddenField = document.getElementById('devis_client');
+    clientHiddenField.value = clientSelect.value
+
+    const submitButton = document.querySelector('button[type="submit"]');
+
+    if (total <= 0) {
+        submitButton.style.display = "none";
+    } else {
+        submitButton.style.display = "block";
+    }
+    }
 </script>
 {% endblock %}

@@ -59,20 +59,41 @@ class DashboardController extends AbstractDashboardController
         ]);
         yield MenuItem::section('Devis');
         yield MenuItem::subMenu('Actions', 'fa fa-bars')->setSubItems([
-            MenuItem::linkToCrud('Voir les devis', 'fas fa-eyes', Devis::class)
+            MenuItem::linkToCrud('Voir les devis', 'fas fa-eye', Devis::class)
         ]);
         yield MenuItem::section('Facture');
         yield MenuItem::subMenu('Actions', 'fa fa-bars')->setSubItems([
-            MenuItem::linkToCrud('Voir les factures', 'fas fa-eyes', Facture::class)
+            MenuItem::linkToCrud('Voir les factures', 'fas fa-eye', Facture::class)
         ]);
         yield MenuItem::section('Configuration');
         $editUrl = $this->adminUrlGenerator
             ->setAction('edit')
             ->setController(CompanyInfoCrudController::class)
-            ->setEntityId(1)  // Remplacer 1 par l'ID du premier enregistrement de CompanyInfo
+            ->setEntityId(1)  
+            ->generateUrl();
+
+            $editUrl2 = $this->adminUrlGenerator
+            ->setAction('edit')
+            ->setController(TexteApiCrudController::class)
+            ->setEntityId(1) 
+            ->generateUrl();
+
+            $editUrl3 = $this->adminUrlGenerator
+            ->setAction('edit')
+            ->setController(TexteApiCrudController::class)
+            ->setEntityId(2) 
+            ->generateUrl();
+
+            $editUrl4 = $this->adminUrlGenerator
+            ->setAction('edit')
+            ->setController(ColorsCrudController::class)
+            ->setEntityId(1) 
             ->generateUrl();
 
         yield MenuItem::linktoUrl('Infos Entreprise', 'fas fa-cogs', $editUrl);
+        yield MenuItem::linktoUrl('Conditions de Vente', 'fas fa-file-contract', $editUrl2);
+        yield MenuItem::linktoUrl('Texte TVA 6%', 'fas fa-file', $editUrl3);
+        yield MenuItem::linktoUrl('Couleur du PDF', 'fas fa-palette', $editUrl4);
         yield MenuItem::section('Lien'); // Ajoutez une nouvelle section au menu
         $apiUrl = $this->generateUrl('app_api'); // Remplacez 'app_api' par le nom de votre route
         yield MenuItem::linkToUrl('Lien vers API', 'fa fa-link', $apiUrl); // Ajoutez le lien vers votre route

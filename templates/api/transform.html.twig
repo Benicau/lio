@@ -1,0 +1,50 @@
+{% extends 'base.html.twig' %}
+{% block title %}Liste des devis{% endblock %}
+
+{% block body %}
+
+<div class="success">
+    <h1>Listes des devis</h1> 
+    <div class="devisFact">
+    {% for message in app.flashes('success') %}
+        <div class="alert alert-success mt-2">
+            {{ message }}
+        </div>
+    {% endfor %}
+        {% if devis is defined and devis is not empty %}
+            <table>
+                <thead>
+                    <tr>
+                        <th>Date de création</th>
+                        <th>Client</th>
+                        <th>Montant HT</th>
+                        <th>Acompte</th>
+                        <th>Date d'echéance</th>
+                        <th>Actions</th>
+                    </tr>
+                </thead>
+                <tbody>
+    {% for devisItem in devis %}
+        <tr>
+            <form method="post" action="{{ path('app_devis_accept', {'id': devisItem.id}) }}">
+                <td>{{ devisItem.createdAt|date('d/m/Y H:i') }}</td>
+                <td>{{ devisItem.client.name }} {{ devisItem.client.surname }}</td>
+                <td>{{ devisItem.montantHorsTva }}</td>
+                <td><input type="float" class='acc' name="new_accompte" value="{{ devisItem.accompte }}" /> €</td>
+                <td><input type="date" class='end-date' name="new_endDate" value="{{ "now"|date('Y-m-d')|date_modify('+15 days')|date('Y-m-d') }}" /></td>
+                <td>
+                 <button type="submit" class='green'>Accepter</button>
+                    <a href="{{ path('app_devis_refuser', {'id': devisItem.id}) }}" class='red'>Refuser</a>
+                </td> 
+            </form>
+        </tr>
+    {% endfor %}
+</tbody>
+            </table>
+        {% else %}
+            <p class='rien'>Aucun devis à afficher.</p>
+        {% endif %}
+    <a href="{{path('app_api')}}" class='retour'>Retour</a>
+    </div>
+</div>
+{% endblock %}

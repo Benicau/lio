@@ -12,6 +12,7 @@ use EasyCorp\Bundle\EasyAdminBundle\Field\TextField;
 use EasyCorp\Bundle\EasyAdminBundle\Field\ImageField;
 use EasyCorp\Bundle\EasyAdminBundle\Config\KeyValueStore;
 use EasyCorp\Bundle\EasyAdminBundle\Context\AdminContext;
+use EasyCorp\Bundle\EasyAdminBundle\Field\TextEditorField;
 use EasyCorp\Bundle\EasyAdminBundle\Controller\AbstractCrudController;
 
 class CompanyInfoCrudController extends AbstractCrudController
@@ -48,6 +49,9 @@ class CompanyInfoCrudController extends AbstractCrudController
         return [
             IdField::new('id')->hideOnForm(),
             TextField::new('name', 'Nom de l\'entreprise'),
+            TextField::new('nom', 'Nom'),
+            TextField::new('prenom', 'Prénom'),
+            TextEditorField::new('slogan', 'Slogan'),
             ImageField::new('logo', 'Logo')
                 ->setBasePath('uploads/logos/')
                 ->setUploadDir('public/uploads/logos/')
@@ -61,6 +65,7 @@ class CompanyInfoCrudController extends AbstractCrudController
             TextField::new('phone', 'Numéro de téléphone'),
             TextField::new('tvaNumber', 'Numéro de TVA'),
             TextField::new('banque', 'Numéro de compte'),
+            TextField::new('email', 'Email'),
         ];
     }
     

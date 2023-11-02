@@ -21,6 +21,16 @@ class DevisRepository extends ServiceEntityRepository
         parent::__construct($registry, Devis::class);
     }
 
+    public function findNewDevisOrderedByDate(): array
+    {
+        return $this->createQueryBuilder('d')
+            ->andWhere('d.etat = :etat')
+            ->setParameter('etat', 'NOUVEAU')
+            ->orderBy('d.createdAt', 'ASC')
+            ->getQuery()
+            ->getResult();
+    }
+
 //    /**
 //     * @return Devis[] Returns an array of Devis objects
 //     */

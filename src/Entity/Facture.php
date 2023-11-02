@@ -2,9 +2,12 @@
 
 namespace App\Entity;
 
-use App\Repository\FactureRepository;
+use DateTime;
+use DateTimeZone;
+use DateTimeImmutable;
 use Doctrine\DBAL\Types\Types;
 use Doctrine\ORM\Mapping as ORM;
+use App\Repository\FactureRepository;
 
 #[ORM\Entity(repositoryClass: FactureRepository::class)]
 class Facture
@@ -13,6 +16,12 @@ class Facture
     #[ORM\GeneratedValue]
     #[ORM\Column]
     private ?int $id = null;
+
+    #[ORM\Column]
+    private ?\DateTimeImmutable $createdAt = null;
+
+    #[ORM\Column(type: Types::DATETIME_MUTABLE, nullable: true)]
+    private ?DateTime $endDate;
 
     #[ORM\Column(type: Types::TEXT)]
     private ?string $texte = null;
@@ -26,11 +35,54 @@ class Facture
     #[ORM\Column(nullable: true)]
     private ?float $benefice = null;
 
-    #[ORM\Column]
-    private ?int $accomptePourcent = null;
+    #[ORM\Column(nullable: true)]
+    private ?float $accompte = null;
 
-    #[ORM\Column]
-    private ?float $accompteVerse = null;
+    #[ORM\ManyToOne(targetEntity: Clients::class)]
+    #[ORM\JoinColumn(nullable: false)]
+    private $client;
+
+    public function __construct()
+    {
+        $this->createdAt = new DateTimeImmutable('now', new DateTimeZone('Europe/Brussels'));
+    }
+
+
+    public function getClient(): ?Clients
+    {
+        return $this->client;
+    }
+
+    public function setClient(?Clients $client): self
+    {
+        $this->client = $client;
+
+        return $this;
+    }
+
+    public function getEndDate(): ?DateTime
+    {
+        return $this->endDate;
+    }
+
+    public function setEndDate(DateTime $endDate): static
+    {
+        $this->endDate = $endDate;
+
+        return $this;
+    }
+
+    public function getCreatedAt(): ?\DateTimeImmutable
+    {
+        return $this->createdAt;
+    }
+
+    public function setCreatedAt(\DateTimeImmutable $createdAt): static
+    {
+        $this->createdAt = $createdAt;
+
+        return $this;
+    }
 
     public function getId(): ?int
     {
@@ -85,26 +137,14 @@ class Facture
         return $this;
     }
 
-    public function getAccomptePourcent(): ?int
+    public function getAccompte(): ?float
     {
-        return $this->accomptePourcent;
+        return $this->accompte;
     }
 
-    public function setAccomptePourcent(int $accomptePourcent): static
+    public function setAccompte(?float $accompte): static
     {
-        $this->accomptePourcent = $accomptePourcent;
-
-        return $this;
-    }
-
-    public function getAccompteVerse(): ?float
-    {
-        return $this->accompteVerse;
-    }
-
-    public function setAccompteVerse(float $accompteVerse): static
-    {
-        $this->accompteVerse = $accompteVerse;
+        $this->accompte = $accompte;
 
         return $this;
     }

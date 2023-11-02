@@ -23,8 +23,7 @@ body {
     top: 50%;
     left: 50%;
     transform: translate(-50%, -50%);
-   
-   
+ 
   
   }
   }
@@ -132,7 +131,7 @@ body {
 
 .content{
  background-color: rgba(255, 255, 255, 0.85);
- width: 90%;
+ width: 95%;
  margin: auto;
  min-height: 90vh;
  margin-top: 20px;
@@ -149,6 +148,7 @@ body {
   border-radius: 5px;
   padding-left: 15px;
   padding-right: 15px;
+  padding-bottom: 5px;
   h2{
     color:black;
     padding-left: 3px;
@@ -156,17 +156,18 @@ body {
     padding-top: 5px;
   }
   input{
-    width: 55px;
+    width: 40px;
+    height: 15px;
   }
  
 }
  .clients{
   background-color:cadetblue;
-    width: 340px;
+    width: 240px;
     height: 90px;
     position: absolute;
     top: 69px;
-    right: 50px;
+    right: 38px;
     border-radius: 5px;
     h2{
       color:black;
@@ -190,7 +191,7 @@ body {
     height: 90px;
     position: absolute;
     top: 69px;
-    right: 400px;
+    right: 288px;
     border-radius: 5px;
     text-align: center;
 
@@ -214,7 +215,7 @@ body {
     height: 90px;
     position: absolute;
     top:69px;
-    right: 590px;
+    right: 478px;
     h2{
       color:black;
       padding-left: 3px;
@@ -234,6 +235,7 @@ body {
   border: 1px solid #ccc;
   cursor: pointer;
   font-size: 18px;
+  margin-bottom: 5px;
   
 }
 
@@ -241,14 +243,265 @@ body {
 .tab-content {
   display: none;
  
-  padding: 10px;
-  font-size: 18px;
+  padding: 2px;
+  font-size: 15px;
   font-weight: 600;
+  padding-top: 12px;
+  .product-item{
+    display: flex;
+    justify-content: space-between;
+    p{
+    margin: 5px;
+   
+  } 
+  }
+ 
 }
 
 /* Style de l'onglet actif */
 .tab.active {
-  background-color: #ccc;
+  background-color:red;
+  color: white;
 }
+}
+.visuel{
+  width: 840px;
+  height: 500px;
+  position: absolute;
+  
+  background-color: white;
+ left: 930px;
+ bottom: 180px;
+  border-radius: 5px;
+  border: 1px solid cadetblue;
+  overflow: scroll;
+
+  thead{
+    background-color: black;
+    color: white;
+   
+
+  } 
+  th{
+    min-width: 100px;
+    padding: 5px;
+    
+  }
+  tbody{
+    background-color:burlywood;
+  }
+  
 }
 
+.result{
+  display: flex;
+  background-color: white;
+  width: 680px;
+  justify-content: space-between;
+  padding: 1px;
+  border: 1px solid cadetblue;
+  left: 930px;
+  bottom: 50px;
+  height: 80px;
+  position: absolute;
+  .ele{
+    width: 120px;
+    
+    text-align: center;
+    h5{
+      margin-top: 7px;
+      color: red;
+      text-decoration: underline;
+    }
+  }
+
+}
+.dateEcheance{
+  position: absolute;
+  background-color: cadetblue;
+  border-radius: 5px; 
+  top:69px;
+  right: 648px;
+  height: 90px;
+  width: 230px;
+  text-align:center;
+  h2{
+    color:black;
+    padding-left: 3px;
+    text-decoration: underline;
+   margin: 0;
+   padding-top: 5px;
+   text-align: center;
+   margin-bottom: 10px;
+  
+  }
+}
+
+button[type="submit"]{
+  background-color: white;
+  border: none;
+  font-size: 23px;
+  padding: 20px;
+  border: 1px solid cadetblue;
+  position: absolute;
+  bottom: 50px;
+  right: 35px;
+  cursor: pointer;
+  &:hover{
+    background-color: cadetblue;
+  }
+
+}
+.success{
+  .alert{
+    color: red;
+    text-align: center;
+    padding-top: 250px;
+    font-size: 36px;
+    font-weight: bold;
+  }
+}
+.acompte-input {
+  width: 100px;
+}
+
+
+.formcon{
+  form{
+    width: 60%;
+    background-color: rgba(255, 255, 255, 0.85);
+    border: 1px solid cadetblue;
+    border-radius: 5px;
+
+    height: 250px;
+    position: absolute;
+    top:50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    text-align: center;
+    padding-top: 75px;
+    .element{
+      padding: 10px;
+      font-size: 21px;
+      input{
+        font-size: 25px;
+        border: none;
+        text-align: center;
+      }  
+    }
+      button[type="submit"]
+            {
+              bottom: 25px;
+              right: 50%;
+              transform: translate(50%);
+
+            }
+
+
+  }
+ 
+  }
+ .deco{
+  padding: 15px;
+    a{
+      padding: 15px;
+      background-color: rgba(255, 255, 255, 0.65);
+      font-size: 32px;
+      z-index: 999999;
+      position: absolute;
+      text-decoration: none;
+      color: black;
+      &:hover{
+        background-color: white;
+      }
+      i{
+        color: chocolate;
+      }
+      border-radius: 5px;
+      bottom: 75px;
+    }
+
+
+}
+.devisFact{
+  background-color: rgba(255, 255, 255, 0.85);
+  width: 90%;
+  margin: auto;
+  margin-top: 135px;
+  min-height: 75vh;
+  padding-top: 50px;
+  position: relative;
+  .acc{
+    width: 80px;
+    text-align: center;
+  }
+
+  button[type="submit"]{
+    background-color: white;
+    border: none; 
+    bottom: 0px;
+    right: 0px;
+    font-size: 22px;
+    color: white;
+    padding: 5px;
+    margin-left: 15px;
+    opacity: 0.8;
+    &:hover{
+          opacity: 1;
+        }
+    position: relative;
+    cursor: pointer;
+    }
+
+ 
+  .alert{
+    margin: 0;
+    padding: 0;
+  }
+  .rien{
+    font-size: 22px;
+    text-align: center;
+  }
+  table{
+    width: 90%;
+    margin: auto;
+    tbody{
+      font-size: 22px;
+      background-color:burlywood;
+      tr{
+        height: 50px;
+        text-align: center;
+        .red{
+          background-color: red;
+        }
+        .green{
+          background-color: green;
+        }
+        a{
+          color: white;
+          text-decoration: none;
+          padding: 5px;
+          margin-left: 15px;
+          opacity: 0.8;
+          &:hover{
+            opacity: 1;
+          }
+          
+        }
+      }
+    }
+  }
+}
+
+.retour{
+  background-color: cadetblue;
+  color: white;
+  padding: 9px;
+  border-radius: 2px;
+  opacity: 0.8;
+  &:hover{opacity: 1;}
+  text-decoration: none;font-size: 22px;
+  position: absolute;
+  top: 10px;
+  right: 35px;
+}

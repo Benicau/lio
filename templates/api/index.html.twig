@@ -19,7 +19,7 @@
     </a>
   </li>
   <li>
-    <a href="{{ path('app_api_facture') }}">
+    <a href="{{ path('app_api_transform') }}">
       <i class="fa-solid fa-shuffle"></i>
       Devis <i class="fa-solid fa-arrow-right white"></i> Facture
     </a>
@@ -42,14 +42,33 @@
   {% endif %}
 </div>
 
-<div class = "info">
-
-<p><i class="fa-solid fa-map-pin"></i>{{ item.adress }}
-  {{item.codePostal}} {{item.city}} ({{item.pays}})</p>
-<p><i class="fa-solid fa-phone"></i>{{item.phone}}</p>
-<p><i class="fa-solid fa-tag"></i>{{item.tvaNumber}}</p>
-
+<div class="info">
+    {% if item.nom and item.prenom %}
+    <p><i class="fas fa-user"></i> {{ item.nom }} {{ item.prenom }}</p>
+    {% endif %}
+    {% if item.adress and item.codePostal and item.city and item.pays %}
+    <p><i class="fa-solid fa-map-pin"></i> {{ item.adress }}, {{ item.codePostal }} {{ item.city }} ({{ item.pays }})</p>
+    {% endif %}
+    {% if item.tvaNumber %}
+    <p><i class="fa-solid fa-tag"></i> {{ item.tvaNumber }}</p>
+    {% endif %}
+    {% if item.banque %}
+    <p><i class="fas fa-university"></i> {{ item.banque }}</p>
+    {% endif %}
+    {% if item.email %}
+    <p><i class="fas fa-envelope"></i> {{ item.email }}</p>
+    {% endif %}
+    {% if item.phone %}
+    <p><i class="fa-solid fa-phone"></i> {{ item.phone }}</p>
+    {% endif %}
 </div>
+<div class="deco">
+<a href="{{ path('app_logout') }}">
+      <i class="fas fa-sign-out-alt"></i>
+      Déconnexion
+    </a>
+</div>
+
 {% endfor %}
 
  

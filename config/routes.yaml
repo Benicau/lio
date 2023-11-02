@@ -1,4 +1,3 @@
-# config/routes.yaml
 dashboard:
     path: /admin
     controller: App\Controller\Admin\DashboardController::index
@@ -10,11 +9,55 @@ app_api:
 app_api_devis:
     path: /indexhome/devis
     controller: App\Controller\ApiController::devis
-    methods: [GET]
+    methods: ['GET', 'POST']
+
+app_api_devis_success:
+    path: /indexhome/devis/success/{id}
+    controller: App\Controller\ApiController::good
+    methods: ['GET', 'POST']
+
+app_api_devis_pdf:
+    path: /indexhome/devis/pdf/{id}
+    controller: App\Controller\ApiController::pdf
+    methods: ['GET', 'POST']
 
 app_api_facture:
     path: /indexhome/facture
     controller: App\Controller\ApiController::facture
-    methods: [GET]
+    methods: ['GET', 'POST']
 
-# ...
+app_api_facture_success:
+    path: /indexhome/facture/success/{id}
+    controller: App\Controller\ApiController::goodtoo
+    methods: ['GET', 'POST']
+
+app_api_facture_pdf:
+    path: /indexhome/facture/pdf/{id}
+    controller: App\Controller\ApiController::pdf2
+    methods: ['GET', 'POST']
+
+app_login:
+    path: /
+    controller: App\Controller\SecurityController::login
+    methods: ['GET', 'POST']
+
+app_logout:
+    path: /logout
+    controller: App\Controller\SecurityController::login
+    methods: ['GET', 'POST']
+
+app_api_transform:
+    path: /indexhome/transform
+    controller: App\Controller\ApiController::trans
+    methods: ['GET', 'POST']
+
+app_devis_refuser:
+    path: /devis/refuser/{id}
+    controller: App\Controller\ApiController::refuserDevis
+    methods: ['GET', 'POST']
+
+app_devis_accept:
+    path: /devis/accept/{id}
+    controller: App\Controller\ApiController::acceptDevis
+    methods: ['GET', 'POST']
+

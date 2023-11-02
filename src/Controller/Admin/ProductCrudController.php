@@ -8,7 +8,6 @@ use EasyCorp\Bundle\EasyAdminBundle\Field\IdField;
 use EasyCorp\Bundle\EasyAdminBundle\Field\TextField;
 use EasyCorp\Bundle\EasyAdminBundle\Field\NumberField;
 use EasyCorp\Bundle\EasyAdminBundle\Field\DateTimeField;
-use Symfony\Component\Form\Extension\Core\Type\MoneyType;
 use EasyCorp\Bundle\EasyAdminBundle\Field\AssociationField;
 use EasyCorp\Bundle\EasyAdminBundle\Controller\AbstractCrudController;
 
@@ -28,28 +27,14 @@ class ProductCrudController extends AbstractCrudController
 
     public function configureFields(string $pageName): iterable
     {
-        $fields = [
+        return [
             TextField::new('description')->setLabel('Titre du produit'),
-            NumberField::new('price')
-                ->setFormType(MoneyType::class)
-                ->setFormTypeOptions([
-                    'currency' => 'EUR',
-                ])
-                ->setLabel('Prix de vente Hors/tva'),
-            NumberField::new('achat')
-                ->setFormType(MoneyType::class)
-                ->setFormTypeOptions([
-                    'currency' => 'EUR',
-                ])
-                ->setLabel("Prix d'achat Hors/tva"),
+            NumberField::new('price')->setLabel('Prix de vente Hors/tva'),  // Ici, j'ai retiré setFormType et setFormTypeOptions
+            NumberField::new('achat')->setLabel("Prix d'achat Hors/tva"),  // Ici aussi
             DateTimeField::new('createdAt')->hideOnForm()->setLabel('Date de création'),
             AssociationField::new('category')->setLabel("Catégorie du produit"),
+            IdField::new('id')->hideOnForm()
         ];
-
-        if ($pageName !== Crud::PAGE_INDEX) {
-            $fields[] = IdField::new('id')->hideOnForm();
-        }
-
-        return $fields;
     }
 }
+

@@ -1,0 +1,24 @@
+{% extends 'base.html.twig' %}
+{% block title %}Devis créé{% endblock %}
+{% set position = 0 %}
+{% block body %}
+<div class="pattern"></div>
+<div class="success">
+    {% for message in app.flashes('success') %}
+    <div class="alert alert-success mt-2">
+        {{ message }}
+    </div>
+    {% endfor %}
+    <div class="menusuccess">
+        <ul>
+            <li>
+            <a href="{{ path('app_api_facture_pdf', {'id': facture_id}) }}" target="_blank" class="pdfLink">Télécharger le PDF</a>
+            </li>
+            <li>
+                <a href="{{ path('app_api')}}">Retour</a>
+            </li>
+        </ul>
+    </div>
+</div>
+
+{% endblock %}
