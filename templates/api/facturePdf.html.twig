@@ -44,13 +44,7 @@
         }
 
         .info i {
-            color: {
-                    {
-                    data.couleur.color
-                }
-            }
-
-            ;
+            color: {{data.couleur.color}};
             font-size: 12px;
         }
 
@@ -64,6 +58,7 @@
         }
 
         span {
+            color: {{data.couleur.color}};
             font-weight: bold;
         }
 
@@ -86,6 +81,7 @@
 
         .totaux {
             margin-top: 10px;
+            page-break-inside: avoid;
         }
 
         .totaux p {
@@ -116,54 +112,51 @@
         .visuel {
             margin-top: 35px;
 
-            border-bottom: 1px solid {
-                    {
-                    data.couleur.color
-                }
-            }
-
-            ;
+            
         }
+        
 
         .visuel thead {
-            background-color: {
-                    {
-                    data.couleur.color
-                }
-            }
-
-            ;
+            background-color: {{data.couleur.color}};
             color: white;
             /* Couleur du texte */
-            font-size: 10px;
+            font-size: 13px;
 
         }
 
         .visuel th {
-            padding: 2px 15px;
+            padding: 2px 7px;
             /* Espacement interne */
             text-align: center
                 /* Alignement du texte */
                 border-bottom: 2px solid #ddd;
             /* Bordure du bas */
-            font-size: 12px;
+            font-size: 13px;
+            font-weight: normal;
+            
+        }
+       .visuel th:not(:first-of-type) {
+             background-color: #D3D3D3;
         }
 
-        .visuel th:last-child {
-            width: 60px;
+
+
+
+        .barre{
+             background-color: {{data.couleur.color}};
+              width:100%;
+              height:1px;
+              margin-top:10px;
         }
+
+
 
         .accompte {
             padding: 10px;
 
-            border: 2px solid {
-                    {
-                    data.couleur.color
-                }
-            }
-
-            ;
+            border: 2px solid {{data.couleur.color}};
             margin-top: 5px;
+            page-break-inside: avoid;
 
         }
 
@@ -178,29 +171,18 @@
             margin-top: 25px;
             text-align: right;
             font-size: 14px;
+            page-break-inside: avoid;
 
         }
 
         .date {
-            background-color: {
-                    {
-                    data.couleur.color
-                }
-            }
-
-            ;
+            background-color: {{data.couleur.color}};
             width: 180px;
             height:30px;
         }
 
         .signe {
-            background-color: {
-                    {
-                    data.couleur.color
-                }
-            }
-
-            ;
+            background-color: {{data.couleur.color}};
             width: 180px;
             height:30px;
 
@@ -241,6 +223,12 @@
             padding-top: 4px;
             font-size: 13px;
 
+        }
+          .barre{
+             background-color: {{data.couleur.color}};
+              width:100%;
+              height:1px;
+              margin-top:10px;
         }
     </style>
 </head>
@@ -339,8 +327,10 @@
             <tbody>
                 {{ data.texte | raw }}
             </tbody>
+            
         </table>
     </div>
+    <div class="barre"></div>
     <div class="totaux">
         <p>Sous Total HT : {{ data.montantHorsTva|number_format(2, '.', ',') }} €</p>
         <p>Tva ({{data.tauxTva}}%) : {{ (data.tauxTva * data.montantHorsTva / 100)|number_format(2, '.', ',') }} €</p>
