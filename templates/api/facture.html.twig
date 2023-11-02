@@ -200,7 +200,7 @@
             achat = achat + (data2 * value)
             if (value > 0) {
                 produitaffich = produitaffich + "<tr><th>" + value + "</th><th>" + description + "</th><th>" +
-                    cat + "</th><th>" + data + " €</th><th>" + value * data + " €</th><th>" + (selectedTva /
+                    cat + "</th><th>" + data + " €</th><th>" + (value * data).toFixed(2) + " €</th><th>" + (selectedTva /
                         100 * (value * data)).toFixed(2) + " €</th></tr>";
             }
 
